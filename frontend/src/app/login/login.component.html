@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap-icons.css"
+      rel="stylesheet"
+      integrity="sha384-y6P0RijY7f3z4z3+M5FvpJj8FuKDHclEiI6uTfBBrJst4z0t1Dv93U5UyfV7Sjo"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background: linear-gradient(#212121, #212121);
+      }
+
+      .form-container {
+        width: 400px;
+        background: linear-gradient(#212121, #212121) padding-box,
+          linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+        border: 2px solid transparent;
+        padding: 32px 24px;
+        font-size: 14px;
+        font-family: inherit;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-sizing: border-box;
+        border-radius: 16px;
+        background-size: 200% 100%;
+        animation: gradient 5s ease infinite;
+        margin: 0 auto;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .form-container button:active {
+        scale: 0.95;
+      }
+
+      .form-container .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-container .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .form-container .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #717171;
+        font-weight: 600;
+        font-size: 12px;
+      }
+
+      .form-container .form-group .input-group {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .form-container .form-group input {
+        flex: 1;
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: #fff;
+        font-family: inherit;
+        background-color: transparent;
+        border: 1px solid #414141;
+      }
+
+      .form-container .form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+        resize: none;
+        color: #fff;
+        height: 96px;
+        border: 1px solid #414141;
+        background-color: transparent;
+        font-family: inherit;
+      }
+
+      .form-container .form-group input::placeholder {
+        opacity: 0.5;
+      }
+
+      .form-container .form-group input:focus {
+        outline: none;
+        border-color: #e81cff;
+      }
+
+      .form-container .form-group textarea:focus {
+        outline: none;
+        border-color: #e81cff;
+      }
+
+      .form-container .form-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: inherit;
+        color: #717171;
+        font-weight: 600;
+        width: 100%;
+        background: #313131;
+        border: 1px solid #414141;
+        padding: 12px 16px;
+        font-size: inherit;
+        gap: 8px;
+        margin-top: 8px;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      .form-container .form-submit-btn:hover {
+        background-color: #fff;
+        border-color: #fff;
+      }
+    </style>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <br /><br />
+    <br />
+    <h1 class="text-center" style="color: #e81cff">METACERI</h1>
+    <div class="form-container">
+      <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit(f)">
+        <h4 class="text-center"><b>Login</b></h4>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <mat-icon>person</mat-icon>
+            </span>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              [(ngModel)]="form.username"
+              #username="ngModel"
+              placeholder="Type your username"
+              required
+            />
+          </div>
+          <div class="form_error" *ngIf="username.errors && f.submitted">
+            Username is required !
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">
+              <mat-icon>lock</mat-icon>
+            </span>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              [(ngModel)]="form.password"
+              #password="ngModel"
+              placeholder="Type your password"
+              required
+              minlength="5"
+            />
+          </div>
+          <div class="form_error" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">
+              Password is required !
+            </div>
+            <div *ngIf="password.errors['minlength']">
+              Password is too short (must be 5 chars) !
+            </div>
+          </div>
+        </div>
+
+        <br />
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="form-submit-btn"
+        >
+          <mat-icon>login</mat-icon>Login
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

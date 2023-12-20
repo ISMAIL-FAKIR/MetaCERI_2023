@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .app-bandeau-notification {
+        background: linear-gradient(#212121, #212121);
+        color: #ffffff;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .main-container {
+        width: 400px;
+        background: linear-gradient(#212121, #212121) padding-box,
+          linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+        border: 2px solid transparent;
+        font-size: 14px;
+        font-family: inherit;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-sizing: border-box;
+        border-radius: 16px;
+        background-size: 200% 100%;
+        animation: gradient 5s ease infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      h2 {
+        color: #e81cff;
+        text-align: center;
+      }
+
+      h6 {
+        color: #e81cff;
+        text-align: center;
+      }
+
+      .post-card {
+        margin-bottom: 35px;
+        background: linear-gradient(#2c3e50, #e81cff);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        border-radius: 9px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .post-header {
+        padding: 15px;
+        background: linear-gradient(#2c3e50, #e81cff);
+        color: #ffffff;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      .post-header h3 {
+        margin: 0;
+        font-size: 1.2em;
+      }
+
+      .post-body {
+        padding: 15px;
+        color: #a9bacc;
+      }
+
+      .post-image {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #eeeeee;
+      }
+
+      .post-buttons {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+      }
+
+      .post-buttons .small-button {
+        padding: 16px; /* Adjust the padding as needed */
+        font-size: 11px; /* Adjust the font size as needed */
+        margin: 0 auto;
+      }
+
+      button {
+        background: linear-gradient(#dd9ee4, #76828a);
+        color: #000000;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .comment-section {
+        padding: 16px;
+        color: black;
+        background-color: #f9f9f9;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .comment {
+        margin-bottom: 8px;
+      }
+
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+
+      .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .pagination-buttons {
+        display: flex;
+        margin: 0 10px;
+      }
+
+      .pagination-text {
+        font-size: 1.2em;
+        color: #3498db;
+      }
+      .hashtags {
+        color: #00194e;
+      }
+      .sort-container {
+        border: 2px solid #e81cff;
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      .sort-container h4 {
+        color: #e81cff;
+        margin-bottom: 8px;
+      }
+      .filter-hashtag-container {
+        border: 2px solid #e81cff;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .filter-hashtag-container input {
+        flex: 1;
+        margin-right: 10px;
+      }
+      .filter-hashtag-container h4 {
+        color: #e81cff;
+        margin-bottom: 8px;
+      }
+      .comment-icons {
+        display: flex;
+        align-items: center;
+      }
+      .comment-icons mat-icon {
+        margin-right: 5px;
+      }
+      .input {
+        color: #e81cff;
+        border: 2px solid #e81cff;
+        border-radius: 10px;
+        padding: 10px 25px;
+        background: transparent;
+        max-width: 190px;
+      }
+      .input:active {
+        box-shadow: 2px 2px 15px #e81cff inset;
+      }
+    </style>
+
+    <title>Home Page</title>
+  </head>
+  <body>
+    <div class="app-bandeau-notification">
+      <!--<app-bandeau-notification></app-bandeau-notification>-->
+      <button class="btn btn-danger float-end" (click)="logout()">
+        Logout
+      </button>
+      <h2>Welcome to METACERI</h2>
+    </div>
+
+    <div class="filter-container">
+      <!-- Hashtag Filter Section -->
+      <div class="filter-hashtag-container">
+        <button (click)="filterByUser()">Filter My Posts</button>
+        <h6>Filter by Hashtag</h6>
+        <div class="comment-icons">
+          <mat-icon>local_offer</mat-icon>
+          <input
+            [(ngModel)]="hashtagToFilter"
+            placeholder="Type it without #"
+            class="input"
+          />
+        </div>
+        <button (click)="filterByHashtag()">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+      <!-- Sorting Section -->
+      <div class="sort-container">
+        <h4>Sort posts</h4>
+        <p style="color: #ffffff">
+          <button (click)="sortPostsByPopularity()" class="sort-button">
+            By Popularity</button
+          >___
+          <button (click)="sortPostsByDate()" class="sort-button">
+            By Date
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <div class="main-container mt-3">
+      <div class="post-container mt-3">
+        <br />
+        <!-- Post List -->
+        <ul class="post-list">
+          <li *ngFor="let post of posts" class="post-card">
+            <!-- Header du post -->
+            <div class="post-header">
+              <h3>By : {{ post.creator }} {{ post.prenom }}</h3>
+            </div>
+            <!-- Affichage du partageur s'il y a un partage -->
+            <div *ngIf="post.sharedByUsername">
+              <p>Partagé par : {{ post.sharedByUsername }}</p>
+            </div>
+            <!-- Contenu de la carte de post -->
+            <mat-card>
+              <!-- Contenu du post -->
+              <div class="post-body">{{ post.body }}</div>
+              <div
+                *ngIf="post.hashtags && post.hashtags.length > 0"
+                class="hashtags"
+              >
+                {{ post.hashtags.join("  ") }}
+              </div>
+              <!-- Image du post -->
+              <img
+                mat-card-image
+                [src]="post.images.url"
+                alt="{{ post.images.title }}"
+                class="post-image"
+              />
+              <!-- Boutons de Like, Commenter et Partager -->
+              <div class="post-buttons">
+                <button
+                  mat-icon-button
+                  class="small-button"
+                  (click)="likePost(post)"
+                >
+                  <mat-icon style="font-size: 16px">thumb_up</mat-icon>
+                  <span style="font-weight: bold">{{ post.likes }}</span>
+                </button>
+                <button
+                  mat-icon-button
+                  class="small-button"
+                  (click)="toggleComments(post)"
+                >
+                  <mat-icon style="font-size: 16px">comment</mat-icon>
+                  <span style="font-weight: bold">{{
+                    post.comments.length
+                  }}</span>
+                </button>
+                <button
+                  mat-icon-button
+                  class="small-button"
+                  (click)="sharePost(post)"
+                >
+                  <mat-icon style="font-size: 16px">share</mat-icon>
+                </button>
+              </div>
+              <!-- Section des commentaires -->
+              <div class="comment-section" *ngIf="post.showComments">
+                <mat-card-footer class="comment-container">
+                  <div *ngFor="let comment of post.comments" class="comment">
+                    <p>
+                      <mat-icon>account_circle</mat-icon>
+                      {{ comment.text }}
+                    </p>
+                  </div>
+                </mat-card-footer>
+                <!-- Form to add a comment -->
+                <form (submit)="addComment(post._id, newComment.value)">
+                  <mat-form-field appearance="fill">
+                    <mat-icon>comment</mat-icon>
+                    <input
+                      placeholder="Add a comment"
+                      class="input"
+                      matInput
+                      #newComment
+                      required
+                    />
+                  </mat-form-field>
+                  <button mat-button type="submit">Add Comment</button>
+                </form>
+              </div>
+            </mat-card>
+          </li>
+          <br />
+        </ul>
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <div class="pagination-buttons">
+            <button (click)="loadPosts(1)" [disabled]="currentPage === 1">
+              First
+            </button>
+          </div>
+          <span class="pagination-text">{{ currentPage }}</span>
+          <div class="pagination-buttons">
+            <button
+              (click)="loadPosts(currentPage - 1)"
+              [disabled]="currentPage === 1"
+            >
+              Previous
+            </button>
+            <button
+              (click)="loadPosts(currentPage + 1)"
+              [disabled]="currentPage === totalPages"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

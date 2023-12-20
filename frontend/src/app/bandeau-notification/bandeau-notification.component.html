@@ -1,0 +1,23 @@
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}, your last connection was : {{ lastLoginTime }}
+</div>
+
+<div *ngIf="logoutMessage" class="alert alert-success">
+  {{ logoutMessage }}
+</div>
+
+<div *ngIf="likeMessage" class="alert alert-success">
+  {{ likeMessage }}
+</div>
+
+<div *ngIf="commentMessage" class="alert alert-success">
+  {{ commentMessage }}
+</div>
+
+<div *ngIf="shareMessage" class="alert alert-success">
+  {{ shareMessage }}
+</div>
