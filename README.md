@@ -1,8 +1,8 @@
-# CERISoNet - Application Web de Réseau Social
+# MetaCERI - Application Web de Réseau Social
 
 ## Description
-CERISoNet est une application web de réseau social développée avec Angular (front-end) et NodeJS (back-end) utilisant MongoDB comme base de données. 
-L'interface utilisateur est créée en utilisant le framework Angular Material, Bootstrap, CSS pour garantir une expérience utilisateur adaptative.
+MetaCERI est une application web de réseau social développée avec Angular (front-end) et NodeJS (back-end) utilisant MongoDB comme base de données. 
+L'interface utilisateur est créée en utilisant Angular Material, Bootstrap, CSS pour garantir une expérience utilisateur adaptative.
 
 ## Fonctionnalités Principales
 
@@ -39,7 +39,7 @@ L'interface utilisateur est créée en utilisant le framework Angular Material, 
 
 ### Installation
 1. Cloner le dépôt : `git clone https://github.com/ISMAIL-FAKIR/MetaCERI_2023.git`
-2. Accéder au répertoire du projet : `cd CERISoNet`
+2. Accéder au répertoire du projet : `cd MetaCERI`
 
 #### Back-End (NodeJS)
 3. Accéder au répertoire Backend : `cd frontend`
